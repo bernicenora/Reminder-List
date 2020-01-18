@@ -36,7 +36,8 @@ function newReminder(e){
     // Add to the Reminder List
     reminderList.appendChild(li);
 
-    //console.log(reminder);
+    //Add Reminder to the Local Storage so that you do not lose the data while doing a refresh on the page
+    addReminderLocalStorage(reminder);
 }
 
 // Using Delegation to remove the reminder from the list
@@ -44,4 +45,29 @@ function removeReminder(e){
     if (e.target.classList.contains('remove-reminder')){
         e.target.parentElement.remove();
     }
+}
+
+//Function - Add Reminder to the Local Storage so that you do not lose the data while doing a refresh on the page
+
+function addReminderLocalStorage(reminder){
+    let reminders = getRemindersFromStorage();
+    
+    // Add the reminder into the Array
+    reminders.push(reminder);
+
+    //Converet the Reminder array into a string
+    localStorage.setItem('reminders', JSON.stringify(reminders));
+}
+
+function getRemindersFromStorage(){
+    let reminders;
+    const remindersLS = localStorage.getItem('reminders');
+
+    // Get the values. If null is returned then we create an empty array
+    if (remindersLS === null){
+        reminders = [];
+    }else{
+        reminders = JSON.parse(remindersLS);
+    }
+    return reminders;
 }
