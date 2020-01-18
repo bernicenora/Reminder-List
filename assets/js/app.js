@@ -10,6 +10,9 @@ function eventListeners(){
 
     // Remove reminder from the list
     reminderList.addEventListener('click', removeReminder);
+
+    // Document
+    document.addEventListener('DOMContentLoaded', localStorageOnLoad);
 }
 
 
@@ -70,4 +73,29 @@ function getRemindersFromStorage(){
         reminders = JSON.parse(remindersLS);
     }
     return reminders;
+}
+
+// Prints Local Storage Reminders on Load of the document
+function localStorageOnLoad(){
+    let reminders = getRemindersFromStorage();
+
+    // Loop through storage and then print the values on screen
+
+    reminders.forEach(function(reminder){
+        //Create the remove button
+        const removeBtn = document.createElement('a');
+        removeBtn.classList = 'remove-reminder';
+        removeBtn.textContent = "X";
+        
+        // Create a list item i.e <li> element
+        const li = document.createElement('li');
+        li.textContent = reminder;
+
+        //Adding the remove Button to each reminder that is generated
+        li.appendChild(removeBtn);
+
+        // Add to the Reminder List
+        reminderList.appendChild(li);
+
+    });
 }
