@@ -7,6 +7,9 @@ eventListeners();
 
 function eventListeners(){
     document.querySelector("#form").addEventListener('submit', newReminder);
+
+    // Remove reminder from the list
+    reminderList.addEventListener('click', removeReminder);
 }
 
 
@@ -34,4 +37,11 @@ function newReminder(e){
     reminderList.appendChild(li);
 
     //console.log(reminder);
+}
+
+// Using Delegation to remove the reminder from the list
+function removeReminder(e){
+    if (e.target.classList.contains('remove-reminder')){
+        e.target.parentElement.remove();
+    }
 }
