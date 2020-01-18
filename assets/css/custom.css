@@ -1,12 +1,25 @@
+body{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
 h1, h2 {
     text-align: center;
+}
+
+h2{
+    color:#33c3f0;
 }
 
 #content {
     margin-top: 40px;
 }
-.remove-tweet,
-.remove-tweet:hover {
+
+.main-content{
+    margin-top: 40px;
+}
+
+.remove-reminder,
+.remove-reminder:hover {
     float: right;
     cursor: pointer;
     color: red;
