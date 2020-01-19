@@ -41,6 +41,12 @@ function newReminder(e){
 
     //Add Reminder to the Local Storage so that you do not lose the data while doing a refresh on the page
     addReminderLocalStorage(reminder);
+
+    // Print an alert
+    alert('Reminder Added');
+
+    // To reset the form
+    this.reset();
 }
 
 // Using Delegation to remove the reminder from the list
@@ -48,6 +54,9 @@ function removeReminder(e){
     if (e.target.classList.contains('remove-reminder')){
         e.target.parentElement.remove();
     }
+    
+    //Remove from Local Storage
+    removeReminderLocalStorage(e.target.parentElement.textContent);
 }
 
 //Function - Add Reminder to the Local Storage so that you do not lose the data while doing a refresh on the page
@@ -98,4 +107,23 @@ function localStorageOnLoad(){
         reminderList.appendChild(li);
 
     });
+}
+
+// Remove Reminder from Local Storage
+function removeReminderLocalStorage(reminder){
+    // Get reminders from Local Storage
+    let reminders = getRemindersFromStorage();
+
+    // Remove X from reminder
+    const reminderDelete = reminder.substring(0, reminder.length-1);
+    
+    //Loop through Reminder Array and remove the particular reminder
+    reminders.forEach(function(remindersLS, index){
+       if (reminderDelete === remindersLS) {
+        reminders.splice(index, 1);
+       }
+    });
+
+    // Save the data in Local Storage
+    localStorage.setItem('reminders', JSON.stringify(reminders));
 }
